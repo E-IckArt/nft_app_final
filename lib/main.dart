@@ -19,13 +19,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Argent Facile NFT',
       theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          fontFamily: 'Roboto',
-          textTheme: GoogleFonts.robotoTextTheme()
+        brightness: Brightness.light,
+        primarySwatch: Colors.deepPurple,
+        primaryColor: Colors.deepPurple,
+        fontFamily: 'Roboto',
+        textTheme: const TextTheme(
+            displayLarge: TextStyle(
+                fontSize: 42, fontWeight: FontWeight.w900, color: Colors.black),
+            titleLarge: TextStyle(
+                fontSize: 28, fontWeight: FontWeight.w900, color: Colors.black),
+          headlineLarge: TextStyle(
+                fontSize: 28, fontWeight: FontWeight.w900, color: Colors.black),
+            bodySmall: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+            bodyMedium: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.w400, color: Colors.black,
+            ),
+            bodyLarge: TextStyle(
+                fontSize: 24, fontWeight: FontWeight.w400, color: Colors.black,
+            ),
+      ),
       ),
       home: const OnboardingPager(),
       // home: const AppWrapper(),
     );
   }
 }
-

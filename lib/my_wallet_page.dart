@@ -66,13 +66,13 @@ class _MyWalletPageState extends State<MyWalletPage> {
             Center(
               child: buildMarketPlaceButton(),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 35),
             buildWalletBtcContainer(),
-            const SizedBox(height: 40),
+            const SizedBox(height: 35),
             buildTextField(),
-            const SizedBox(height: 40),
+            const SizedBox(height: 35),
             buildCenterWithSendButton(),
-            const SizedBox(height: 40),
+            const SizedBox(height: 35),
             buildWalletEurosContainer(),
           ],
         ),
@@ -113,13 +113,9 @@ class _MyWalletPageState extends State<MyWalletPage> {
                     children: [
                       Text(
                         '$_amountEuro',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 42,
-                            letterSpacing: 1.25,
-                            color: Colors.black),
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.euro,
                         color: Colors.black,
                         size: 32,
@@ -175,6 +171,9 @@ class _MyWalletPageState extends State<MyWalletPage> {
                 ),
                 labelText: "Spécifier un montant à revendre",
                 focusColor: Colors.tealAccent,
+                filled: true,
+                // TODO - Fix the error background color
+                // fillColor: Colors.grey.shade50,
               ));
   }
 
