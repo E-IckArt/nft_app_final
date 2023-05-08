@@ -22,11 +22,8 @@ class Page2 extends StatelessWidget {
         body: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 65),
               child: Column(mainAxisSize: MainAxisSize.max, children: [
-                const SizedBox(
-                  height: 42,
-                ),
                 Container(
                     width: double.maxFinite,
                     height: 96,
@@ -37,7 +34,7 @@ class Page2 extends StatelessWidget {
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(50)))),
                 const Padding(
-                  padding: EdgeInsets.all(26.0),
+                  padding: EdgeInsets.all(30.0),
                   child: Text("Imaginez posséder tous ces JPEG",
                       maxLines: 3,
                       textAlign: TextAlign.center,
@@ -73,7 +70,7 @@ class Page2 extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyText2),
                 ),
                 const SizedBox(
-                  height: 175,
+                  height: 75,
                 ),
                 Row(
                     children: <Widget>[
@@ -109,7 +106,7 @@ class Page2 extends StatelessWidget {
                       )
                     ]),
                 const SizedBox(
-                  height: 20,
+                  // height: 20,
                 )
               ]),
             )
