@@ -69,101 +69,113 @@ class _MyWalletPageState extends State<MyWalletPage> {
             const SizedBox(height: 40),
             buildWalletBtcContainer(),
             const SizedBox(height: 40),
-            TextField(
-                controller: myAmountController,
-                onChanged: (text) {
-                  _calculateEuroAmount(text);
-                },
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.tealAccent,
-                    ),
-                  ),
-                  labelText: "Spécifier un montant à revendre",
-                  focusColor: Colors.tealAccent,
-                )),
+            buildTextField(),
             const SizedBox(height: 40),
-            Center(
-              child: MaterialButton(
-                onPressed: () {
-                  _incrementEuroWallet();
-                  print(_amountEuro);
-                },
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(35))),
-                textColor: Colors.deepPurpleAccent,
-                color: Colors.white,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                  child: Text(
-                    'REVENDRE POUR  $_calculatedAmount €',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      letterSpacing: 1.25,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            buildCenterWithSendButton(),
             const SizedBox(height: 40),
-            Container(
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/background-white.png'),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(9))),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 20.0, horizontal: 20.0),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      width: double.infinity,
-                      child: Text("MON WALLET EN EUROS",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 18,
-                            letterSpacing: 1.25,
-                            color: Colors.black,
-                          ),
-                          textAlign: TextAlign.start),
-                    ),
-                    const SizedBox(height: 40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '$_amountEuro',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontSize: 42,
-                              letterSpacing: 1.25,
-                              color: Colors.black),
-                        ),
-                        Icon(
-                          Icons.euro,
-                          color: Colors.black,
-                          size: 32,
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-              ),
-            ),
+            buildWalletEurosContainer(),
           ],
         ),
       ),
       drawer: buildDrawer(
           context), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  Container buildWalletEurosContainer() {
+    return Container(
+            width: double.maxFinite,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/background-white.png'),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(9))),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: 20.0, horizontal: 20.0),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text("MON WALLET EN EUROS",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 18,
+                          letterSpacing: 1.25,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.start),
+                  ),
+                  const SizedBox(height: 40),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '$_amountEuro',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 42,
+                            letterSpacing: 1.25,
+                            color: Colors.black),
+                      ),
+                      Icon(
+                        Icons.euro,
+                        color: Colors.black,
+                        size: 32,
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                ],
+              ),
+            ),
+          );
+  }
+
+  Center buildCenterWithSendButton() {
+    return Center(
+            child: MaterialButton(
+              onPressed: () {
+                _incrementEuroWallet();
+                print(_amountEuro);
+              },
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(35))),
+              textColor: Colors.deepPurpleAccent,
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                child: Text(
+                  'REVENDRE POUR  $_calculatedAmount €',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    letterSpacing: 1.25,
+                  ),
+                ),
+              ),
+            ),
+          );
+  }
+
+  TextField buildTextField() {
+    return TextField(
+              controller: myAmountController,
+              onChanged: (text) {
+                _calculateEuroAmount(text);
+              },
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.tealAccent,
+                  ),
+                ),
+                labelText: "Spécifier un montant à revendre",
+                focusColor: Colors.tealAccent,
+              ));
   }
 
   Container buildWalletBtcContainer() {
