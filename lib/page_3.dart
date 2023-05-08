@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'my_wallet_page.dart';
-
 class Page3 extends StatelessWidget {
   const Page3({
     super.key,
@@ -131,12 +129,7 @@ class Page3 extends StatelessWidget {
                   const SizedBox(height: 20),
                   MaterialButton(
                     onPressed: () => {
-                      Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => const MyWalletPage(
-                                    title: 'My Wallet Page',
-                                  )))
+                      Navigator.pushNamed(context, '/my-wallet-page')
                     },
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(35))),

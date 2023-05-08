@@ -76,12 +76,7 @@ class Page2 extends StatelessWidget {
                     children: <Widget>[
                       TextButton(
                           onPressed: () => {
-                            Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) => const MyWalletPage(title: "My Wallet")
-                                )
-                            )
+                            Navigator.pushNamed(context, '/my-wallet-page')
                           },
                           child: const Text("PASSER",
                               style: TextStyle(
@@ -90,10 +85,7 @@ class Page2 extends StatelessWidget {
                       const Spacer(),
                       MaterialButton(
                         onPressed: () => {
-                          Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) => const Page3(title: "Page 3")))
+                          Navigator.pushNamed(context, '/third')
                         },
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(35))),
