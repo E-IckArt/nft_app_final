@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nft_app_final/my_wallet_page.dart';
+import 'package:nft_app_final/views/Onboarding/page_3.dart';
 
-import 'package:nft_app_final/page_3.dart';
+import '../my_wallet_page.dart';
 
 class Page2 extends StatelessWidget {
   Page2({

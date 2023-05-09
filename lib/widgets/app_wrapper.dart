@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'views/Onboarding/on_boarding_pager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-// Used to disable onboarding pages
-import 'package:nft_app_final/widgets/app_wrapper.dart';
+import '../views/my_wallet_page.dart';
+import '../views/Onboarding/on_boarding_pager.dart';
 
-void main() {
-  // runApp(const MyApp());
-  runApp(const AppWrapper());
+class AppWrapper extends StatefulWidget {
+  const AppWrapper({Key? key}) : super(key: key);
+
+  @override
+  State<AppWrapper> createState() => _AppWrapperState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+class _AppWrapperState extends State<AppWrapper> {
+  bool skipOnboarding = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Argent Facile NFT',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          brightness: Brightness.light,
-          primary: Colors.deepPurple,
-          secondary: Colors.tealAccent ,
-          tertiary: Colors.white,
-        ),
-        splashColor: Colors.tealAccent,
-        fontFamily: 'Roboto',
-        textTheme: const TextTheme(
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            brightness: Brightness.light,
+            primary: Colors.deepPurple,
+            secondary: Colors.tealAccent ,
+            tertiary: Colors.white,
+          ),
+          splashColor: Colors.tealAccent,
+          fontFamily: 'Roboto',
+          textTheme: const TextTheme(
             displayLarge: TextStyle(
                 fontSize: 42, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             titleLarge: TextStyle(
@@ -41,9 +41,9 @@ class MyApp extends StatelessWidget {
                 fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: 1.25),
             bodyLarge: TextStyle(
                 fontSize: 24, fontWeight: FontWeight.w400, letterSpacing: 1.25),
-      )),
-      // home: const OnboardingPager(),
-      home: const AppWrapper(),
+          )),
+      home: skipOnboarding ? const MyWalletPage(title: "My Wallet") : const OnboardingPager(),
     );
+    //A vous de jouer ;)
   }
 }

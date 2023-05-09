@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'my_wallet_page.dart';
+import '../my_wallet_page.dart';
 
 class Page3 extends StatelessWidget {
   const Page3({

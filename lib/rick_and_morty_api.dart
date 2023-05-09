@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:nft_app_final/model/character.dart';
@@ -19,6 +18,9 @@ class RickAndMortyApiState {
 
       list.forEach((element) {
         print(element.name);
+        print(element.species);
+        print(element.status);
+
       });
 
       return list;

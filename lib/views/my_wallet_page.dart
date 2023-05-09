@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nft_app_final/marketplace.dart';
+import 'package:nft_app_final/views/marketplace.dart';
 import 'package:nft_app_final/rick_and_morty_api.dart';
 
 class MyWalletPage extends StatefulWidget {
