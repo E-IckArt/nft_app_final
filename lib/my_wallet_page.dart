@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nft_app_final/RickAndMortyApi.dart';
 
 class MyWalletPage extends StatefulWidget {
   const MyWalletPage({super.key, required this.title});
@@ -234,7 +235,10 @@ class _MyWalletPageState extends State<MyWalletPage> {
   MaterialButton buildMarketPlaceButton() {
     return MaterialButton(
       onPressed: () {
-        debugPrint('Received click');
+        Navigator.push(context,
+        PageRouteBuilder(
+            pageBuilder: (_, __, ___) =>
+            const RickAndMortyApi(title: 'Place du Marché NFT')));
       },
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(35))),
@@ -274,7 +278,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.tertiary),),
           ),
           ListTile(
-            title: const Text('Item 1'),
+            title: const Text('Place du Marché NFT'),
             onTap: () {
               // Update the state of the app
               // ...

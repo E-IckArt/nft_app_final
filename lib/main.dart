@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nft_app_final/app_wrapper.dart';
-
+import 'package:nft_app_final/app_wrapper.dart'; // Used to disable onboarding pages
 import 'my_wallet_page.dart';
 import 'on_boarding_pager.dart';
 
