@@ -49,7 +49,7 @@ class Page1 extends StatelessWidget {
               Text(
                   "La plus grand place de marché au monde pour les NFTs (Non-fungible Tokens) où vous pourrez faire les meilleurs affaires.",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText2),
+                  style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 34),
               Row(children: [
                 TextButton(
@@ -77,8 +77,8 @@ class Page1 extends StatelessWidget {
                   },
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(35))),
-                  textColor: Colors.white,
-                  color: Colors.tealAccent[200],
+                  textColor: Theme.of(context).colorScheme.tertiary,
+                  color: Theme.of(context).colorScheme.secondary,
                   child: const Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 10, vertical: 8),

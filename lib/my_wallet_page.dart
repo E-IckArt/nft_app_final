@@ -96,15 +96,10 @@ class _MyWalletPageState extends State<MyWalletPage> {
                   vertical: 20.0, horizontal: 20.0),
               child: Column(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: double.infinity,
                     child: Text("MON WALLET EN EUROS",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 18,
-                          letterSpacing: 1.25,
-                          color: Colors.black,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Colors.black),
                         textAlign: TextAlign.start),
                   ),
                   const SizedBox(height: 40),
@@ -113,7 +108,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
                     children: [
                       Text(
                         '$_amountEuro',
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Colors.black),
                       ),
                       const Icon(
                         Icons.euro,
@@ -138,13 +133,13 @@ class _MyWalletPageState extends State<MyWalletPage> {
               },
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(35))),
-              textColor: Colors.deepPurpleAccent,
-              color: Colors.white,
+              textColor: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.tertiary,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Text(
                   'REVENDRE POUR  $_calculatedAmount €',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     letterSpacing: 1.25,
@@ -190,15 +185,10 @@ class _MyWalletPageState extends State<MyWalletPage> {
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               width: double.infinity,
               child: Text("MON WALLET BTC",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 18,
-                    letterSpacing: 1.25,
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Theme.of(context).colorScheme.tertiary),
                   textAlign: TextAlign.start),
             ),
             const SizedBox(height: 40),
@@ -207,15 +197,11 @@ class _MyWalletPageState extends State<MyWalletPage> {
               children: [
                 Text(
                   '$_amountBtc',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 42,
-                      letterSpacing: 1.25,
-                      color: Colors.white),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Theme.of(context).colorScheme.tertiary),
                 ),
-                const Icon(
+                Icon(
                   Icons.currency_bitcoin,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.tertiary,
                   size: 32,
                 )
               ],
@@ -230,15 +216,11 @@ class _MyWalletPageState extends State<MyWalletPage> {
               textColor: Colors.white,
               color: Colors.tealAccent[400],
               height: 36,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Text(
                   'GAGNER 1 BTC',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 18,
-                    letterSpacing: 1.25,
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: Theme.of(context).colorScheme.tertiary),
                 ),
               ),
             ),
@@ -256,8 +238,8 @@ class _MyWalletPageState extends State<MyWalletPage> {
       },
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(35))),
-      textColor: Colors.deepPurpleAccent,
-      color: Colors.white,
+      textColor: Theme.of(context).colorScheme.primary,
+      color: Theme.of(context).colorScheme.tertiary,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         child: Row(
@@ -284,15 +266,12 @@ class _MyWalletPageState extends State<MyWalletPage> {
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
+           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.deepPurple,
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: Text('Argent Facile NFT',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold)),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.tertiary),),
           ),
           ListTile(
             title: const Text('Item 1'),

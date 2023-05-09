@@ -67,7 +67,7 @@ class Page2 extends StatelessWidget {
                   child: Text(
                       "Vous posséderez un identifiant unique sur la blockchain qui pourra renvoyer (ou non) vers un JPEG hébergé sur un serveur qui sera certainement fermé dans quelques années.",
                       textAlign: TextAlign.justify,
-                      style: Theme.of(context).textTheme.bodyText2),
+                      style: Theme.of(context).textTheme.bodySmall),
                 ),
                 const SizedBox(
                   height: 75,
@@ -97,8 +97,8 @@ class Page2 extends StatelessWidget {
                         },
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(35))),
-                        textColor: Colors.white,
-                        color: Colors.tealAccent[200],
+                        textColor: Theme.of(context).colorScheme.tertiary,
+                        color: Theme.of(context).colorScheme.secondary,
                         child: const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                           child: Icon(Icons.arrow_forward),

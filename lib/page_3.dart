@@ -140,8 +140,8 @@ class Page3 extends StatelessWidget {
                     },
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(35))),
-                    textColor: Colors.white,
-                    color: Colors.tealAccent[200],
+                    textColor: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context).colorScheme.secondary,
                     child: const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 0),

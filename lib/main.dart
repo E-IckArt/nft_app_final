@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nft_app_final/app_wrapper.dart';
 
 import 'my_wallet_page.dart';
@@ -19,27 +18,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Argent Facile NFT',
       theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.deepPurple,
-        primaryColor: Colors.deepPurple,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          brightness: Brightness.light,
+          primary: Colors.deepPurple,
+          secondary: Colors.tealAccent ,
+          tertiary: Colors.white,
+        ),
+        splashColor: Colors.tealAccent,
         fontFamily: 'Roboto',
         textTheme: const TextTheme(
             displayLarge: TextStyle(
-                fontSize: 42, fontWeight: FontWeight.w900, color: Colors.black),
+                fontSize: 42, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             titleLarge: TextStyle(
-                fontSize: 28, fontWeight: FontWeight.w900, color: Colors.black),
-          headlineLarge: TextStyle(
-                fontSize: 28, fontWeight: FontWeight.w900, color: Colors.black),
+                fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: 1.25),
+            headlineLarge: TextStyle(
+                fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: 1.25),
+            headlineMedium: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             bodySmall: TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+                fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 1.25),
             bodyMedium: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w400, color: Colors.black,
-            ),
+                fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: 1.25),
             bodyLarge: TextStyle(
-                fontSize: 24, fontWeight: FontWeight.w400, color: Colors.black,
-            ),
-      ),
-      ),
+                fontSize: 24, fontWeight: FontWeight.w400, letterSpacing: 1.25),
+      )),
       home: const OnboardingPager(),
       // home: const AppWrapper(),
     );
