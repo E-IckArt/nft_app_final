@@ -72,7 +72,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                               SizedBox(height: 16),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.start,
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Column(
@@ -166,7 +166,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const Divider(color: Colors.teal);
+                        return SizedBox(height: 16);
                       },
                       itemCount: snapshot.data!.length,
                     );
