@@ -18,8 +18,7 @@ class RickAndMortyApiState {
 
       list.forEach((element) {
         print(element.name);
-        print(element.species);
-        print(element.status);
+        print(element.episode[0]);
 
       });
 

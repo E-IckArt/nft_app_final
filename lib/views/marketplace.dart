@@ -38,7 +38,7 @@ class _MarketPlaceState extends State<MarketPlace> {
         title: Text(widget.title),
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 7.0),
           child: Center(
             child: FutureBuilder<List<Character>>(
                 future: futureCharacters,
@@ -72,10 +72,12 @@ class _MarketPlaceState extends State<MarketPlace> {
                               SizedBox(height: 16),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     // textAlign: TextAlign.start,
                                     children: [
                                       Text(
@@ -103,7 +105,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                                         ),
                                       ),
                                       Text(
-                                        character.episode[0],
+                                        'character.episode[0]',
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           fontSize: 12,
@@ -114,11 +116,46 @@ class _MarketPlaceState extends State<MarketPlace> {
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text('${character.status.name} - ${character.species.name}',
                                         style: TextStyle(
                                           fontSize: 12,
                                         ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.currency_bitcoin_rounded),
+                                            Text('Prix : ${character.id}'),
+                                          ],
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            TextButton(
+                                              child: const Text('ACHETER'),
+                                              onPressed: () {/* ... */},
+                                            ),
+                                          ],
                                       ),
                                     ],
                                   ),
