@@ -24,6 +24,7 @@ class _AppWrapperState extends State<AppWrapper> {
             secondary: Colors.tealAccent ,
             tertiary: Colors.white,
           ),
+          scaffoldBackgroundColor: const Color(0xFFF5F5F5),
           splashColor: Colors.tealAccent,
           fontFamily: 'Roboto',
           textTheme: const TextTheme(
