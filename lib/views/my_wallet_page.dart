@@ -13,10 +13,10 @@ class MyWalletPage extends StatefulWidget {
 }
 
 class _MyWalletPageState extends State<MyWalletPage> {
-  int _amountBtc = 0;
-  int _amountEuro = 0;
-  int _calculatedAmount = 0;
-  final int _rate = 2;
+  double _amountBtc = 0.00;
+  double _amountEuro = 0.00;
+  double _calculatedAmount = 0.00;
+  final double _rate = 2.00;
 
   final myAmountController = TextEditingController();
 
@@ -28,8 +28,8 @@ class _MyWalletPageState extends State<MyWalletPage> {
 
   _incrementEuroWallet() {
     setState(() {
-      if ((int.parse(myAmountController.text)) <= _amountBtc) {
-        _amountBtc -= (int.parse(myAmountController.text));
+      if ((double.parse(myAmountController.text)) <= _amountBtc) {
+        _amountBtc -= (double.parse(myAmountController.text));
         _amountEuro += _calculatedAmount;
         clearText();
       } else {
@@ -40,7 +40,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
 
   void _calculateEuroAmount(String text) {
     setState(() {
-      _calculatedAmount = (int.parse(myAmountController.text)) * _rate;
+      _calculatedAmount = (double.parse(myAmountController.text)) * _rate;
     });
   }
 

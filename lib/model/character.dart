@@ -3,6 +3,7 @@
 //     final charactersResponse = charactersResponseFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:math';
 
 CharactersResponse charactersResponseFromJson(String str) => CharactersResponse.fromJson(json.decode(str));
@@ -44,6 +45,7 @@ class Character {
   DateTime created;
 
   Rarity rarity;
+  double price;
 
   Character({
     required this.id,
@@ -60,6 +62,7 @@ class Character {
     required this.created,
 
     required this.rarity,
+    required this.price,
   });
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
@@ -76,8 +79,8 @@ class Character {
     url: json["url"],
     created: DateTime.parse(json["created"]),
 
-    // rarity: rarityValues.map["Rare"]!
     rarity: setRarity(),
+    price: setPrice(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -94,8 +97,8 @@ class Character {
     "url": url,
     "created": created.toIso8601String(),
 
-    // "rarity": rarityValues.reverse[rarity],
     "rarity": rarity,
+    "price": price,
   };
 }
 
@@ -147,17 +150,16 @@ enum Rarity { RARE, COMMON, EPIC, LEGENDARY, UNKNOWN }
 setRarity() {
   Random random = Random();
   int pick= random.nextInt(Rarity.values.length);
-  var rarity = Rarity.values[pick];
-  return rarity;
+  return Rarity.values[pick];
 }
 
-// final rarityValues = EnumValues({
-//   "Rare": Rarity.RARE,
-//   "Common": Rarity.COMMON,
-//   "Epic": Rarity.EPIC,
-//   "Legendary": Rarity.LEGENDARY,
-//   "unknown": Rarity.UNKNOWN
-// });
+List priceList = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10.0];
+
+setPrice() {
+  Random random = Random();
+  double price = priceList[random.nextInt(priceList.length)];
+  return price;
+}
 
 class Info {
   int count;

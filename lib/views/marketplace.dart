@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import '../model/character.dart';
 import '../rick_and_morty_api.dart';
@@ -45,6 +47,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     return ListView.separated(
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         Character character = snapshot.data?[index];
                         return Card(
@@ -69,135 +72,140 @@ class _MarketPlaceState extends State<MarketPlace> {
                                   height: 250,
                                 ),
                               ),
-                              SizedBox(height: 16),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 16.0, horizontal: 16.0),
+                                child: Column(
                                 children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    // textAlign: TextAlign.start,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Dernière position connue',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          textBaseline: TextBaseline.alphabetic,
-                                        ),
-                                      ),
-                                      Text(
-                                        character.location.name,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Text(
-                                        'Aperçu dans',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          textBaseline: TextBaseline.alphabetic,
-                                        ),
-                                      ),
-                                      Text(
-                                        'character.episode[0]',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          textBaseline: TextBaseline.alphabetic,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          CircleAvatar(
-                                            backgroundColor: createStatusColor(
-                                                character.status),
-                                            radius: 5,
-                                          ),
-                                          SizedBox(width: 8),
                                           Text(
-                                            '${character.status.name} - ${character.species.name}',
+                                            'Dernière position connue',
                                             style: TextStyle(
                                               fontSize: 12,
+                                              color: Colors.grey.shade700,
                                             ),
                                           ),
+                                          Text(
+                                            character.location.name,
+                                            style: Theme.of(context).textTheme.headlineSmall,
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            'Aperçu dans',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey.shade700,
+                                            ),
+                                          ),
+                                          Text(
+                                            'character.episode[0]',
+                                              style: Theme.of(context).textTheme.headlineSmall,
+                                            ),
                                         ],
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Chip(
-                                              label: Text(createRarityText(
-                                                  character.rarity),
-                                              style: Theme.of(context).textTheme.headlineSmall),
-                                              backgroundColor: createRarityColor(
-                                                  character.rarity)),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor: createStatusColor(
+                                                    character.status),
+                                                radius: 5,
+                                              ),
+                                              SizedBox(width: 8),
+                                              Text(
+                                                '${character.status.name} - ${character.species.name}',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Chip(
+                                                  label: Text(createRarityText(
+                                                      character.rarity),
+                                                  style: Theme.of(context).textTheme.headlineSmall),
+                                                  backgroundColor: createRarityColor(
+                                                      character.rarity)),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Column(
                                         children: [
-                                          const Icon(
-                                              Icons.currency_bitcoin_rounded),
-                                          Text('Prix : ${character.id}'),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              const Icon(
+                                                  Icons.currency_bitcoin_rounded, size: 18,),
+                                              Text(createPrice(character.price, character.id).toString(),
+                                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                                    color: Colors.black).copyWith(
+                                                    fontWeight: FontWeight.w600),
+                                              ),
+                                            ],
+                                          ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Column(
                                         children: [
-                                          TextButton(
-                                            child: const Text('ACHETER'),
-                                            onPressed: () {/* ... */},
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              TextButton(
+                                                onPressed: () {/* ... */},
+                                                child: Text('ACHETER',
+                                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                                        color: Theme.of(context).colorScheme.primary).copyWith(
+                                                    fontWeight: FontWeight.w600),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
                                 ],
-                              ),
+                              ),),
                             ],
                           ),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 16);
+                        return const SizedBox(height: 16);
                       },
-                      itemCount: snapshot.data!.length,
                     );
                   } else if (snapshot.hasError) {
                     return Text('ERROR: ${snapshot.error}');
@@ -228,12 +236,16 @@ class _MarketPlaceState extends State<MarketPlace> {
     }
   }
 
+  createPrice(double price, id) {
+        return price * 1.5 * id;
+  }
+
   Color createRarityColor(Rarity rarity) {
     switch (rarity) {
       case Rarity.COMMON:
-        return Color(0xFFDEF8E7);
+        return const Color(0xFFDEF8E7);
       case Rarity.RARE:
-        return Color(0xFFE8DEF8);
+        return const Color(0xFFE8DEF8);
       case Rarity.EPIC:
         return Colors.deepPurpleAccent.shade100;
       case Rarity.LEGENDARY:
