@@ -17,7 +17,15 @@ class _AppWrapperState extends State<AppWrapper> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Argent Facile NFT',
-      theme: ThemeData(
+      theme: buildThemeData(),
+      home: skipOnboarding
+          ? const MyWalletPage(title: "My Wallet")
+          : const OnboardingPager(),
+    );
+  }
+
+    ThemeData buildThemeData() {
+      return ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(
             brightness: Brightness.light,
             primary: Colors.deepPurple,
@@ -32,6 +40,10 @@ class _AppWrapperState extends State<AppWrapper> {
                 fontSize: 42, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             titleLarge: TextStyle(
                 fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: 1.25),
+            titleMedium: TextStyle(
+                fontSize: 24, fontWeight: FontWeight.w900, letterSpacing: 1.25),
+            titleSmall: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             headlineLarge: TextStyle(
                 fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             headlineMedium: TextStyle(
@@ -44,9 +56,7 @@ class _AppWrapperState extends State<AppWrapper> {
                 fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: 1.25),
             bodyLarge: TextStyle(
                 fontSize: 24, fontWeight: FontWeight.w400, letterSpacing: 1.25),
-          )),
-      home: skipOnboarding ? const MyWalletPage(title: "My Wallet") : const OnboardingPager(),
-    );
-    //A vous de jouer ;)
+          ));
+
   }
 }

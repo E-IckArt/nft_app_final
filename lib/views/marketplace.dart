@@ -3,18 +3,10 @@ import '../model/character.dart';
 import '../rick_and_morty_api.dart';
 
 class MarketPlace extends StatefulWidget {
-  // final items = List.generate(20, (i) => i);
-
-  MarketPlace({
+  const MarketPlace({
     super.key,
     required this.title,
-  }) {
-    // loadCharacter();
-  }
-
-  // loadCharacter() async {
-  //   final results = await RickAndMortyApiState().getCharacters();
-  // }
+  });
 
   final String title;
 
@@ -55,148 +47,38 @@ class _MarketPlaceState extends State<MarketPlace> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              ListTile(
-                                title: Text(character.name),
-                                subtitle: Text(character.type),
-                                trailing:
-                                    const Icon(Icons.chevron_right_outlined),
-                                onTap: (() => {openPage(context, character)}),
-                              ),
-                              SizedBox(
-                                child: Image.network(
-                                  character.image,
-                                  fit: BoxFit.cover,
-                                  width: double.maxFinite,
-                                  height: 250,
-                                ),
-                              ),
+                              buildListTile(character, context),
+                              buildImageSizedBox(character),
                               const SizedBox(height: 16),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 16.0, horizontal: 16.0),
                                 child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Dernière position connue',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey.shade700,
-                                            ),
-                                          ),
-                                          Text(
-                                            character.location.name,
-                                            style: Theme.of(context).textTheme.headlineSmall,
-                                          ),
-                                          const SizedBox(height: 10),
-                                          Text(
-                                            'Planet d\'origine',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey.shade700,
-                                            ),
-                                          ),
-                                          Text(
-                                            character.origin.name,
-                                              style: Theme.of(context).textTheme.headlineSmall,
-                                            ),
-                                        ],
-                                      ),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: <Widget>[
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: createStatusColor(
-                                                    character.status),
-                                                radius: 5,
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Text(
-                                                '${character.status.name} - ${character.species.name}',
-                                                style: const TextStyle(
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Chip(
-                                                  label: Text(createRarityText(
-                                                      character.rarity),
-                                                  style: Theme.of(context).textTheme.headlineSmall),
-                                                  backgroundColor: createRarityColor(
-                                                      character.rarity)),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              const Icon(
-                                                  Icons.currency_bitcoin_rounded, size: 18,),
-                                              Text(createPrice(character.price, character.id).toString(),
-                                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                                    color: Colors.black).copyWith(
-                                                    fontWeight: FontWeight.w600),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {/* ... */},
-                                                child: Text('ACHETER',
-                                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                                        color: Theme.of(context).colorScheme.primary).copyWith(
-                                                    fontWeight: FontWeight.w600),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),),
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        buildColumnForPositionAndOrigin(
+                                            character, context),
+                                        buildColumnForStatusAndRarity(
+                                            character, context),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        buildColumnForPrice(character, context),
+                                        buildColumnForBuyButton(context),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -212,6 +94,146 @@ class _MarketPlaceState extends State<MarketPlace> {
                   return const CircularProgressIndicator();
                 }),
           )),
+    );
+  }
+
+  Column buildColumnForStatusAndRarity(
+      Character character, BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CircleAvatar(
+              backgroundColor: createStatusColor(character.status),
+              radius: 5,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              '${character.status.name} - ${character.species.name}',
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Chip(
+                label: Text(createRarityText(character.rarity),
+                    style: Theme.of(context).textTheme.headlineSmall),
+                backgroundColor: createRarityColor(character.rarity)),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Column buildColumnForPositionAndOrigin(
+      Character character, BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Dernière position connue',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey.shade700,
+          ),
+        ),
+        Text(
+          character.location.name,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const SizedBox(height: 10),
+        Text(
+          'Planet d\'origine',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey.shade700,
+          ),
+        ),
+        Text(
+          character.origin.name,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+      ],
+    );
+  }
+
+  Column buildColumnForBuyButton(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextButton(
+              onPressed: () {/* ... */},
+              child: Text(
+                'ACHETER',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.primary)
+                    .copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Column buildColumnForPrice(Character character, BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.currency_bitcoin_rounded,
+              size: 18,
+            ),
+            Text(
+              createPrice(character.price, character.id).toString(),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: Colors.black)
+                  .copyWith(fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  SizedBox buildImageSizedBox(Character character) {
+    return SizedBox(
+      child: Image.network(
+        character.image,
+        fit: BoxFit.cover,
+        width: double.maxFinite,
+        height: 250,
+      ),
+    );
+  }
+
+  ListTile buildListTile(Character character, BuildContext context) {
+    return ListTile(
+      title: Text(
+        character.name,
+        style: Theme.of(context).textTheme.titleSmall,
+      ),
+      subtitle: Text(character.type),
+      trailing: const Icon(Icons.chevron_right_outlined),
+      onTap: (() => {openPage(context, character)}),
     );
   }
 
@@ -235,7 +257,7 @@ class _MarketPlaceState extends State<MarketPlace> {
   }
 
   createPrice(double price, id) {
-        return price * 1.5 * id;
+    return price * 1.5 * id;
   }
 
   Color createRarityColor(Rarity rarity) {
