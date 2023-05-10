@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import '../model/character.dart';
 import '../rick_and_morty_api.dart';
@@ -99,16 +97,16 @@ class _MarketPlaceState extends State<MarketPlace> {
                                             character.location.name,
                                             style: Theme.of(context).textTheme.headlineSmall,
                                           ),
-                                          SizedBox(height: 10),
+                                          const SizedBox(height: 10),
                                           Text(
-                                            'Aperçu dans',
+                                            'Planet d\'origine',
                                             style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.grey.shade700,
                                             ),
                                           ),
                                           Text(
-                                            'character.episode[0]',
+                                            character.origin.name,
                                               style: Theme.of(context).textTheme.headlineSmall,
                                             ),
                                         ],
@@ -126,10 +124,10 @@ class _MarketPlaceState extends State<MarketPlace> {
                                                     character.status),
                                                 radius: 5,
                                               ),
-                                              SizedBox(width: 8),
+                                              const SizedBox(width: 8),
                                               Text(
                                                 '${character.status.name} - ${character.species.name}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 12,
                                                 ),
                                               ),
