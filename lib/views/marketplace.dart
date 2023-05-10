@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/character.dart';
 import '../rick_and_morty_api.dart';
+import 'details_page.dart';
 
 class MarketPlace extends StatefulWidget {
   const MarketPlace({
@@ -238,7 +239,7 @@ class _MarketPlaceState extends State<MarketPlace> {
   }
 
   openPage(context, character) {
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(character: character)));
   }
 
   String createRarityText(Rarity rarity) {
