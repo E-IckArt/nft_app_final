@@ -42,6 +42,8 @@ class Character {
   String url;
   DateTime created;
 
+  Rarity rarity;
+
   Character({
     required this.id,
     required this.name,
@@ -55,6 +57,8 @@ class Character {
     required this.episode,
     required this.url,
     required this.created,
+
+    required this.rarity,
   });
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
@@ -70,6 +74,8 @@ class Character {
     episode: List<String>.from(json["episode"].map((x) => x)),
     url: json["url"],
     created: DateTime.parse(json["created"]),
+
+    rarity: rarityValues.map[json["rarity"]]!,
   );
 
   Map<String, dynamic> toJson() => {
@@ -85,6 +91,8 @@ class Character {
     "episode": List<dynamic>.from(episode.map((x) => x)),
     "url": url,
     "created": created.toIso8601String(),
+
+    "rarity": rarityValues.reverse[rarity],
   };
 }
 
@@ -129,6 +137,14 @@ final statusValues = EnumValues({
   "Alive": Status.ALIVE,
   "Dead": Status.DEAD,
   "unknown": Status.UNKNOWN
+});
+
+enum Rarity { RARE, COMMUN, UNKNOWN }
+
+final rarityValues = EnumValues({
+  "Rare": Rarity.RARE,
+  "Commun": Rarity.COMMUN,
+  "unknown": Rarity.UNKNOWN
 });
 
 class Info {
