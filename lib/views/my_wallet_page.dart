@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nft_app_final/views/marketplace.dart';
 
+import '../widgets/my_drawer.dart';
+
 class MyWalletPage extends StatefulWidget {
   const MyWalletPage({super.key, required this.title});
 
@@ -82,8 +84,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
           ],
         ),
       ),
-      drawer: buildDrawer(
-          context), // This trailing comma makes auto-formatting nicer for build methods.
+      drawer: MyDrawer(context: context), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -267,40 +268,6 @@ class _MyWalletPageState extends State<MyWalletPage> {
       ),
     );
   }
-
-  Drawer buildDrawer(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
-        children: [
-           DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            child: Text('Argent Facile NFT',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.tertiary),),
-          ),
-          ListTile(
-            title: const Text('Place du Marché'),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Item 2'),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-    );
-  }
 }
+
+
