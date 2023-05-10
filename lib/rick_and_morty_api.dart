@@ -16,12 +16,6 @@ class RickAndMortyApiState {
         list.add(Character.fromJson(entry));
       }
 
-      list.forEach((element) {
-        print(element.name);
-        print(element.episode[0]);
-
-      });
-
       return list;
     } else {
       throw Exception('Failed to load Characters list');

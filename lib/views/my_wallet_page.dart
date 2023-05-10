@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nft_app_final/views/marketplace.dart';
-import 'package:nft_app_final/rick_and_morty_api.dart';
 
 class MyWalletPage extends StatefulWidget {
   const MyWalletPage({super.key, required this.title});
@@ -283,7 +282,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.tertiary),),
           ),
           ListTile(
-            title: const Text('Place du Marché NFT'),
+            title: const Text('Place du Marché'),
             onTap: () {
               // Update the state of the app
               // ...

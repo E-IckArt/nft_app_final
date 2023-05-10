@@ -3,7 +3,7 @@ import '../model/character.dart';
 import '../rick_and_morty_api.dart';
 
 class MarketPlace extends StatefulWidget {
-  final items = List.generate(20, (i) => i);
+  // final items = List.generate(20, (i) => i);
 
   MarketPlace({
     super.key,
@@ -77,7 +77,8 @@ class _MarketPlaceState extends State<MarketPlace> {
                                 children: [
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     // textAlign: TextAlign.start,
                                     children: [
                                       Text(
@@ -117,51 +118,73 @@ class _MarketPlaceState extends State<MarketPlace> {
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text('${character.status.name} - ${character.species.name}',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundColor: createStatusColor(
+                                                character.status),
+                                            radius: 5,
+                                          ),
+                                          SizedBox(width: 8),
+                                          Text(
+                                            '${character.status.name} - ${character.species.name}',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Chip(
-                                        avatar: CircleAvatar(
-                                          backgroundColor: Colors.grey.shade800,
-                                          child: const Text('AB'),
-                                        ),
-                                        label: const Text('Aaron Burr'),
-                                      )                                    ],
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Chip(
+                                              label: Text(createRarityText(
+                                                  character.rarity),
+                                              style: Theme.of(context).textTheme.headlineSmall),
+                                              backgroundColor: createRarityColor(
+                                                  character.rarity)),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
                                       Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Icon(Icons.currency_bitcoin_rounded),
-                                            Text('Prix : ${character.id}'),
-                                          ],
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                              Icons.currency_bitcoin_rounded),
+                                          Text('Prix : ${character.id}'),
+                                        ],
                                       ),
                                     ],
                                   ),
                                   Column(
                                     children: [
                                       Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            TextButton(
-                                              child: const Text('ACHETER'),
-                                              onPressed: () {/* ... */},
-                                            ),
-                                          ],
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          TextButton(
+                                            child: const Text('ACHETER'),
+                                            onPressed: () {/* ... */},
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -171,7 +194,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                           ),
                         );
                       },
-                      separatorBuilder: (context, index) {
+                      separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(height: 16);
                       },
                       itemCount: snapshot.data!.length,
@@ -188,5 +211,46 @@ class _MarketPlaceState extends State<MarketPlace> {
 
   openPage(context, character) {
     // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage()));
+  }
+
+  String createRarityText(Rarity rarity) {
+    switch (rarity) {
+      case Rarity.COMMON:
+        return 'Commun';
+      case Rarity.RARE:
+        return 'Rare';
+      case Rarity.EPIC:
+        return 'Epique';
+      case Rarity.LEGENDARY:
+        return 'Légendaire';
+      default:
+        return 'Inconnu';
+    }
+  }
+
+  Color createRarityColor(Rarity rarity) {
+    switch (rarity) {
+      case Rarity.COMMON:
+        return Color(0xFFDEF8E7);
+      case Rarity.RARE:
+        return Color(0xFFE8DEF8);
+      case Rarity.EPIC:
+        return Colors.deepPurpleAccent.shade100;
+      case Rarity.LEGENDARY:
+        return Colors.yellowAccent;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  Color createStatusColor(Status status) {
+    switch (status) {
+      case Status.ALIVE:
+        return Colors.green;
+      case Status.DEAD:
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
   }
 }

@@ -36,6 +36,8 @@ class _AppWrapperState extends State<AppWrapper> {
                 fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             headlineMedium: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w900, letterSpacing: 1.25),
+            headlineSmall: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.w900, letterSpacing: 1.25),
             bodySmall: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 1.25),
             bodyMedium: TextStyle(
