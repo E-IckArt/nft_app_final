@@ -10,15 +10,15 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Details Page')),
+      appBar: AppBar(title: Text(character.name)),
       body: Center(
         child: ElevatedButton(
-            onPressed: goBack(), child: const Text('Go Back')),
+            onPressed: goBack(context), child: const Text('Go Back')),
       ),
     );
   }
 
-  goBack() {
-    print('Test');
+  goBack(context) {
+    Navigator.pop(context);
   }
 }
