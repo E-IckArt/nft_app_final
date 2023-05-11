@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nft_app_final/views/marketplace.dart';
 
+import '../model/my_wallet_page.dart';
 import '../widgets/my_drawer.dart';
 
 class MyWalletPage extends StatefulWidget {
@@ -13,39 +14,17 @@ class MyWalletPage extends StatefulWidget {
 }
 
 class _MyWalletPageState extends State<MyWalletPage> {
-  double _amountBtc = 0.00;
-  double _amountEuro = 0.00;
-  double _calculatedAmount = 0.00;
-  final double _rate = 2.00;
 
   final myAmountController = TextEditingController();
-
-  void _incrementBTCWallet() {
-    setState(() {
-      _amountBtc++;
-    });
-  }
-
-  _incrementEuroWallet() {
-    setState(() {
-      if ((double.parse(myAmountController.text)) <= _amountBtc) {
-        _amountBtc -= (double.parse(myAmountController.text));
-        _amountEuro += _calculatedAmount;
-        clearText();
-      } else {
-        //
-      }
-    });
-  }
-
-  void _calculateEuroAmount(String text) {
-    setState(() {
-      _calculatedAmount = (double.parse(myAmountController.text)) * _rate;
-    });
-  }
+  MyWallet myWallet = MyWallet();
 
   void clearText() {
     myAmountController.clear();
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -113,7 +92,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '$_amountEuro',
+                        myWallet.amountEuro.toStringAsFixed(2),
                         style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Colors.black),
                       ),
                       const Icon(
@@ -133,9 +112,11 @@ class _MyWalletPageState extends State<MyWalletPage> {
   Center buildCenterWithSendButton() {
     return Center(
             child: MaterialButton(
-              onPressed: () {
-                _incrementEuroWallet();
-                print(_amountEuro);
+              onPressed: () => {
+                setState(() {
+                  myWallet.incrementEuroWallet(myAmountController.text);
+                }),
+                print(myWallet.amountEuro),
               },
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(35))),
@@ -144,7 +125,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Text(
-                  'REVENDRE POUR  $_calculatedAmount €',
+                  'REVENDRE POUR  ${myWallet.calculatedAmount.toStringAsFixed(2)} €',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -159,8 +140,10 @@ class _MyWalletPageState extends State<MyWalletPage> {
   TextField buildTextField() {
     return TextField(
               controller: myAmountController,
-              onChanged: (text) {
-                _calculateEuroAmount(text);
+              onChanged: (String value) {
+                setState() {
+                  myWallet.calculateEuroAmount(myAmountController.text);
+                }
               },
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
@@ -202,7 +185,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '$_amountBtc',
+                  myWallet.amountBtc.toStringAsFixed(2),
                   style: Theme.of(context).textTheme.displayLarge?.copyWith(color: Theme.of(context).colorScheme.tertiary),
                 ),
                 Icon(
@@ -215,7 +198,9 @@ class _MyWalletPageState extends State<MyWalletPage> {
             const SizedBox(height: 30),
             MaterialButton(
               onPressed: () => {
-                _incrementBTCWallet(),
+                setState(() {
+                  myWallet.incrementBTCWallet();
+                }),
               },
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(35))),
