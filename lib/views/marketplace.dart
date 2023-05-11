@@ -30,71 +30,79 @@ class _MarketPlaceState extends State<MarketPlace> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 7.0),
-          child: Center(
-            child: FutureBuilder<List<Character>>(
-                future: futureCharacters,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.separated(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        Character character = snapshot.data?[index];
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              buildListTile(character, context),
-                              buildImageSizedBox(character),
-                              const SizedBox(height: 16),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 16.0, horizontal: 16.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        buildColumnForPositionAndOrigin(
-                                            character, context),
-                                        buildColumnForStatusAndRarity(
-                                            character, context),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        buildColumnForPrice(character, context),
-                                        buildColumnForBuyButton(context),
-                                      ],
-                                    ),
-                                  ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          var characters = await RickAndMortyApiState().getCharacters();
+          setState(() {
+            futureCharacters = Future.value(characters);
+          });
+        },
+        child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 7.0),
+            child: Center(
+              child: FutureBuilder<List<Character>>(
+                  future: futureCharacters,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.separated(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          Character character = snapshot.data?[index];
+                          return Card(
+                            clipBehavior: Clip.hardEdge,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                buildListTile(character, context),
+                                buildImageSizedBox(character),
+                                const SizedBox(height: 16),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16.0, horizontal: 16.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          buildColumnForPositionAndOrigin(
+                                              character, context),
+                                          buildColumnForStatusAndRarity(
+                                              character, context),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          buildColumnForPrice(character, context),
+                                          buildColumnForBuyButton(context),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(height: 16);
-                      },
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('ERROR: ${snapshot.error}');
-                  }
-                  // By default, show a loading spinner.
-                  return const CircularProgressIndicator();
-                }),
-          )),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(height: 16);
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('ERROR: ${snapshot.error}');
+                    }
+                    // By default, show a loading spinner.
+                    return const CircularProgressIndicator();
+                  }),
+            )),
+      ),
     );
   }
 
@@ -124,9 +132,13 @@ class _MarketPlaceState extends State<MarketPlace> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Chip(
-                label: Text(createRarityText(character.rarity),
-                    style: Theme.of(context).textTheme.headlineSmall),
-                backgroundColor: createRarityColor(character.rarity)),
+              label: Text(createRarityText(character.rarity),
+                  style: Theme.of(context).textTheme.headlineSmall),
+              backgroundColor: createRarityColor(character.rarity),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
           ],
         ),
       ],
@@ -143,24 +155,30 @@ class _MarketPlaceState extends State<MarketPlace> {
           'Dernière position connue',
           style: TextStyle(
             fontSize: 12,
-            color: Colors.grey.shade700,
+            color: Colors.grey.shade600,
           ),
         ),
         Text(
           character.location.name,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(color: Colors.black54),
         ),
         const SizedBox(height: 10),
         Text(
           'Planet d\'origine',
           style: TextStyle(
             fontSize: 12,
-            color: Colors.grey.shade700,
+            color: Colors.grey.shade600,
           ),
         ),
         Text(
           character.origin.name,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(color: Colors.black54),
         ),
       ],
     );
@@ -238,9 +256,12 @@ class _MarketPlaceState extends State<MarketPlace> {
     );
   }
 
-  openPage(context, character) {
+  void openPage(context, character) {
     print('test');
-    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(character: character)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailsPage(character: character)));
   }
 
   String createRarityText(Rarity rarity) {
