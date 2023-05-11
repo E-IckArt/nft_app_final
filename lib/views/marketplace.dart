@@ -136,7 +136,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                   style: Theme.of(context).textTheme.headlineSmall),
               backgroundColor: createRarityColor(character.rarity),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
           ],
