@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Used to enable onboarding pages
-import 'views/Onboarding/on_boarding_pager.dart';
-
-// Used to disable onboarding pages
+// Used to enable or disable onboarding pages
 import 'package:nft_app_final/widgets/app_wrapper.dart';
 
 void main() {

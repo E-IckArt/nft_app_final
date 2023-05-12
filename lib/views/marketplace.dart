@@ -257,7 +257,6 @@ class _MarketPlaceState extends State<MarketPlace> {
   }
 
   void openPage(context, character) {
-    print('test');
     Navigator.push(
         context,
         MaterialPageRoute(

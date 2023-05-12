@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nft_app_final/views/my_wallet_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({

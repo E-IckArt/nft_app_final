@@ -1,31 +1,37 @@
+import 'dart:ffi';
+
+import 'package:flutter/material.dart';
+
 class MyWallet {
   double amountBtc = 0.00;
   double amountEuro = 0.00;
-  double calculatedAmount = 0.00;
-  double rate = 2;
 
-  MyWallet() {
-    amountBtc = 0.00;
-    amountEuro = 0.00;
-    calculatedAmount = 0.00;
-    rate = 2.00;
-}
+  double valueToSell = 0.00;
+  double calculatedAmount = 0.00;
+  double rate = 2.00;
 
   void incrementBTCWallet() {
     amountBtc++;
   }
 
-  void incrementEuroWallet(String amount) {
-    if ((double.parse(amount)) <= amountBtc) {
-      amountBtc -= (double.parse(amount));
+  void incrementEuroWallet(double valueToSell) {
+      amountBtc -= (valueToSell);
       amountEuro += calculatedAmount;
-    } else {
-      //
-    }
   }
 
-  void calculateEuroAmount(String amount) {
-    calculatedAmount = (double.parse(amount)) * rate;
-    print(calculatedAmount);
+  void calculateEuroAmount() {
+      calculatedAmount = valueToSell * rate;
+  }
+
+  void setRate(double newRate) {
+    rate = newRate;
+  }
+
+  bool btcCreditCheck() {
+    if ( valueToSell <= amountBtc) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

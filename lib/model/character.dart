@@ -3,7 +3,6 @@
 //     final charactersResponse = charactersResponseFromJson(jsonString);
 
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:math';
 
 CharactersResponse charactersResponseFromJson(String str) => CharactersResponse.fromJson(json.decode(str));

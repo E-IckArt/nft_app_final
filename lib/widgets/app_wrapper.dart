@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../views/my_wallet_page.dart';
 import '../views/Onboarding/on_boarding_pager.dart';
 
