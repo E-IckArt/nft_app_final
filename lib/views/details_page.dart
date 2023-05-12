@@ -12,9 +12,46 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(character.name)),
       body: Center(
-        // child: Text('Hello from details page'),
-        child: ElevatedButton(
-            onPressed: (() => goBack(context)), child: const Text('Go Back')),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            children: [
+
+          Card(
+              child: SizedBox(
+                child: Image.network(character.image),
+          )),
+          Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+
+                Text(character.name),
+                Text(character.location.name),
+                Text(character.origin.name),
+                Text(character.species.name),
+                Text(character.type),
+                Text(createRarityText(character.rarity)),
+
+              ],
+            ),
+          ),
+          TextButton(
+              onPressed: () {
+                print('Added to cart');
+              },
+              child: Text(
+                'ACHETER',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.primary)
+                    .copyWith(fontWeight: FontWeight.w600),
+              )),
+          ElevatedButton(
+              onPressed: (() => goBack(context)), child: const Text('Go Back')),
+        ]),
       ),
     );
   }

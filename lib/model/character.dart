@@ -152,6 +152,21 @@ setRarity() {
   return Rarity.values[pick];
 }
 
+String createRarityText(Rarity rarity) {
+  switch (rarity) {
+    case Rarity.COMMON:
+      return 'Commun';
+    case Rarity.RARE:
+      return 'Rare';
+    case Rarity.EPIC:
+      return 'Epique';
+    case Rarity.LEGENDARY:
+      return 'Légendaire';
+    default:
+      return 'Inconnu';
+  }
+}
+
 List priceList = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10.0];
 
 setPrice() {

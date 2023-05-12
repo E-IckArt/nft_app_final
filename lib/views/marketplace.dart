@@ -58,33 +58,36 @@ class _MarketPlaceState extends State<MarketPlace> {
                                 buildListTile(character, context),
                                 buildImageSizedBox(character),
                                 const SizedBox(height: 16),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 16.0, horizontal: 16.0),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          buildColumnForPositionAndOrigin(
-                                              character, context),
-                                          buildColumnForStatusAndRarity(
-                                              character, context),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          buildColumnForPrice(character, context),
-                                          buildColumnForBuyButton(context),
-                                        ],
-                                      ),
-                                    ],
+                                FittedBox(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16.0, horizontal: 16.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            buildColumnForPositionAndOrigin(
+                                                character, context),
+                                            buildColumnForStatusAndRarity(
+                                                character, context),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            buildColumnForPrice(character, context),
+                                            const SizedBox(width: 150),
+                                            buildColumnForBuyButton(context),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -115,11 +118,12 @@ class _MarketPlaceState extends State<MarketPlace> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const SizedBox(width: 15),
             CircleAvatar(
               backgroundColor: createStatusColor(character.status),
               radius: 5,
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 2),
             Text(
               '${character.status.name} - ${character.species.name}',
               style: const TextStyle(
@@ -188,7 +192,7 @@ class _MarketPlaceState extends State<MarketPlace> {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextButton(
@@ -263,20 +267,20 @@ class _MarketPlaceState extends State<MarketPlace> {
             builder: (context) => DetailsPage(character: character)));
   }
 
-  String createRarityText(Rarity rarity) {
-    switch (rarity) {
-      case Rarity.COMMON:
-        return 'Commun';
-      case Rarity.RARE:
-        return 'Rare';
-      case Rarity.EPIC:
-        return 'Epique';
-      case Rarity.LEGENDARY:
-        return 'Légendaire';
-      default:
-        return 'Inconnu';
-    }
-  }
+  // String createRarityText(Rarity rarity) {
+  //   switch (rarity) {
+  //     case Rarity.COMMON:
+  //       return 'Commun';
+  //     case Rarity.RARE:
+  //       return 'Rare';
+  //     case Rarity.EPIC:
+  //       return 'Epique';
+  //     case Rarity.LEGENDARY:
+  //       return 'Légendaire';
+  //     default:
+  //       return 'Inconnu';
+  //   }
+  // }
 
   createPrice(double price, id) {
     return price * 1.5 * id;
