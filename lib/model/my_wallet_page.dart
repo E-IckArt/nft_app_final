@@ -26,5 +26,6 @@ class MyWallet {
 
   void calculateEuroAmount(String amount) {
     calculatedAmount = (double.parse(amount)) * rate;
+    print(calculatedAmount);
   }
 }

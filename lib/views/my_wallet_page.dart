@@ -25,6 +25,8 @@ class _MyWalletPageState extends State<MyWalletPage> {
   @override
   void initState() {
     super.initState();
+
+    myAmountController.addListener(myWallet.calculateEuroAmount(myAmountController.text));
   }
 
   @override
@@ -125,7 +127,8 @@ class _MyWalletPageState extends State<MyWalletPage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Text(
-                  'REVENDRE POUR  ${myWallet.calculatedAmount.toStringAsFixed(2)} €',
+                  // 'REVENDRE POUR  ${myWallet.calculatedAmount.toStringAsFixed(2)} €',
+                  'REVENDRE POUR  ${myAmountController.text} €',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -141,9 +144,11 @@ class _MyWalletPageState extends State<MyWalletPage> {
     return TextField(
               controller: myAmountController,
               onChanged: (String value) {
-                setState() {
-                  myWallet.calculateEuroAmount(myAmountController.text);
-                }
+                myWallet.calculateEuroAmount(myAmountController.text);
+                // setState() {
+                //   // myWallet.calculateEuroAmount(myAmountController.text);
+                //   myWallet.calculateEuroAmount(value);
+                // }
               },
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
