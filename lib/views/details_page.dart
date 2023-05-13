@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nft_app_final/model/character.dart';
+
+import '../widgets/buttons/button_buy.dart';
 // import 'package:galaxies_app/userService.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -37,20 +39,12 @@ class DetailsPage extends StatelessWidget {
               ],
             ),
           ),
-          TextButton(
-              onPressed: () {
-                print('Added to cart');
-              },
-              child: Text(
-                'ACHETER',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: Theme.of(context).colorScheme.primary)
-                    .copyWith(fontWeight: FontWeight.w600),
-              )),
-          ElevatedButton(
-              onPressed: (() => goBack(context)), child: const Text('Go Back')),
+          ButtonBuy(),
+          SizedBox(
+            width: 50,
+            child: ElevatedButton(
+                onPressed: (() => goBack(context)), child: const Text('Go Back')),
+          ),
         ]),
       ),
     );
@@ -60,3 +54,4 @@ class DetailsPage extends StatelessWidget {
     Navigator.pop(context);
   }
 }
+

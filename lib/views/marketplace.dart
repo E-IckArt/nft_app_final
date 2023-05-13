@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nft_app_final/widgets/buttons/button_buy.dart';
 import '../model/character.dart';
 import '../rick_and_morty_api.dart';
 import 'details_page.dart';
@@ -195,17 +196,7 @@ class _MarketPlaceState extends State<MarketPlace> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextButton(
-              onPressed: () {/* ... */},
-              child: Text(
-                'ACHETER',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: Theme.of(context).colorScheme.primary)
-                    .copyWith(fontWeight: FontWeight.w600),
-              ),
-            ),
+            ButtonBuy(),
           ],
         ),
       ],
