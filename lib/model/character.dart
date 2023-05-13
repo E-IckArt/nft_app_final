@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 CharactersResponse charactersResponseFromJson(String str) => CharactersResponse.fromJson(json.decode(str));
 
@@ -167,12 +168,42 @@ String createRarityText(Rarity rarity) {
   }
 }
 
+Color createRarityColor(Rarity rarity) {
+  switch (rarity) {
+    case Rarity.COMMON:
+      return const Color(0xFFDEF8E7);
+    case Rarity.RARE:
+      return const Color(0xFFE8DEF8);
+    case Rarity.EPIC:
+      return Colors.deepPurpleAccent.shade100;
+    case Rarity.LEGENDARY:
+      return Colors.yellowAccent;
+    default:
+      return Colors.grey;
+  }
+}
+
+Color createStatusColor(Status status) {
+  switch (status) {
+    case Status.ALIVE:
+      return Colors.green;
+    case Status.DEAD:
+      return Colors.red;
+    default:
+      return Colors.grey;
+  }
+}
+
 List priceList = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10.0];
 
 setPrice() {
   Random random = Random();
   double price = priceList[random.nextInt(priceList.length)];
   return price;
+}
+
+createPrice(double price, id) {
+  return price * 1.5 * id;
 }
 
 class Info {

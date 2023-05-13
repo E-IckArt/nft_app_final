@@ -195,7 +195,7 @@ class _MarketPlaceState extends State<MarketPlace> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
             ButtonBuy(),
           ],
         ),
@@ -256,50 +256,5 @@ class _MarketPlaceState extends State<MarketPlace> {
         context,
         MaterialPageRoute(
             builder: (context) => DetailsPage(character: character)));
-  }
-
-  // String createRarityText(Rarity rarity) {
-  //   switch (rarity) {
-  //     case Rarity.COMMON:
-  //       return 'Commun';
-  //     case Rarity.RARE:
-  //       return 'Rare';
-  //     case Rarity.EPIC:
-  //       return 'Epique';
-  //     case Rarity.LEGENDARY:
-  //       return 'Légendaire';
-  //     default:
-  //       return 'Inconnu';
-  //   }
-  // }
-
-  createPrice(double price, id) {
-    return price * 1.5 * id;
-  }
-
-  Color createRarityColor(Rarity rarity) {
-    switch (rarity) {
-      case Rarity.COMMON:
-        return const Color(0xFFDEF8E7);
-      case Rarity.RARE:
-        return const Color(0xFFE8DEF8);
-      case Rarity.EPIC:
-        return Colors.deepPurpleAccent.shade100;
-      case Rarity.LEGENDARY:
-        return Colors.yellowAccent;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  Color createStatusColor(Status status) {
-    switch (status) {
-      case Status.ALIVE:
-        return Colors.green;
-      case Status.DEAD:
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
   }
 }
