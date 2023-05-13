@@ -10,7 +10,7 @@ class AppWrapper extends StatefulWidget {
 }
 
 class _AppWrapperState extends State<AppWrapper> {
-  bool skipOnboarding = true;
+  bool skipOnboarding = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

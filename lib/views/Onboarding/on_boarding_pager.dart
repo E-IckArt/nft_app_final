@@ -24,13 +24,13 @@ class OnboardingPager extends StatelessWidget {
           controller: controller,
           children: <Widget>[
             const Center(
-              child: Page1(title: "Page 1"),
+              child: Page1(title: "Argent Facile NFT"),
             ),
             Center(
-              child: Page2(title: "Page 2"),
+              child: Page2(title: "Argent Facile NFT"),
             ),
             const Center(
-              child: Page3(title: "Page 3"),
+              child: Page3(title: "Argent Facile NFT"),
             )
           ],
         ),
