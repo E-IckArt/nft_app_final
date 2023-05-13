@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 // Used to enable or disable onboarding pages
 import 'package:nft_app_final/widgets/app_wrapper.dart';
 
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 void main() {
-  // runApp(const MyApp());
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const AppWrapper());
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
