@@ -20,6 +20,7 @@ class _MyWalletPageState extends State<MyWalletPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(widget.title),
       ),

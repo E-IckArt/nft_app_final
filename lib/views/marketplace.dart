@@ -28,6 +28,7 @@ class _MarketPlaceState extends State<MarketPlace> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(widget.title),
       ),

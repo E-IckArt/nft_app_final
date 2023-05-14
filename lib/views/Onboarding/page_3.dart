@@ -15,6 +15,7 @@ class Page3 extends StatelessWidget {
     final display = MediaQuery.of(context);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(title),
       ),
